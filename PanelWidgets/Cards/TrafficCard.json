@@ -1,0 +1,47 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "${origin} → ${destination}",
+              "size": "Small",
+              "isSubtle": true,
+              "wrap": false,
+              "spacing": "None"
+            },
+            {
+              "type": "TextBlock",
+              "text": "${travelTime}",
+              "size": "ExtraLarge",
+              "weight": "Bolder",
+              "spacing": "None"
+            },
+            {
+              "type": "TextBlock",
+              "text": "${congestionLevel}",
+              "size": "Small",
+              "color": "${congestionColor}",
+              "spacing": "None"
+            },
+            {
+              "type": "TextBlock",
+              "text": "${distance}",
+              "size": "Small",
+              "isSubtle": true,
+              "spacing": "None"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

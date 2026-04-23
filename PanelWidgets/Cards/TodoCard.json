@@ -1,0 +1,88 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "${listName}",
+      "weight": "Bolder",
+      "size": "Medium",
+      "spacing": "None"
+    },
+    {
+      "type": "Container",
+      "$data": "${tasks}",
+      "spacing": "Small",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "spacing": "Small",
+          "selectAction": {
+            "type": "Action.Execute",
+            "verb": "toggleTask",
+            "data": {
+              "taskId": "${id}",
+              "completed": "${completed}"
+            }
+          },
+          "columns": [
+            {
+              "type": "Column",
+              "width": "auto",
+              "verticalContentAlignment": "Center",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "☑",
+                  "size": "Medium",
+                  "spacing": "None",
+                  "$when": "${completed}"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "☐",
+                  "size": "Medium",
+                  "spacing": "None",
+                  "$when": "${!completed}"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "verticalContentAlignment": "Center",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "${title}",
+                  "size": "Small",
+                  "wrap": true,
+                  "maxLines": 2,
+                  "isSubtle": "${completed}",
+                  "spacing": "None"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "text": "All caught up! ✓",
+      "$when": "${count(tasks) == 0}",
+      "isSubtle": true,
+      "size": "Small",
+      "horizontalAlignment": "Center",
+      "spacing": "Medium"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Execute",
+      "title": "Open To-Do",
+      "verb": "openApp"
+    }
+  ]
+}

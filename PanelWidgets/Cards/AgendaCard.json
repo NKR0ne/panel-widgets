@@ -1,0 +1,65 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "${todayLabel}",
+      "weight": "Bolder",
+      "size": "Medium",
+      "spacing": "None"
+    },
+    {
+      "type": "Container",
+      "$data": "${events}",
+      "spacing": "Small",
+      "separator": true,
+      "items": [
+        {
+          "type": "ColumnSet",
+          "spacing": "Small",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "65px",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "${time}",
+                  "size": "Small",
+                  "isSubtle": true,
+                  "wrap": false,
+                  "spacing": "None"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "${title}",
+                  "size": "Small",
+                  "wrap": true,
+                  "maxLines": 2,
+                  "spacing": "None"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "text": "No events today",
+      "$when": "${count(events) == 0}",
+      "isSubtle": true,
+      "size": "Small",
+      "horizontalAlignment": "Center",
+      "spacing": "Medium"
+    }
+  ]
+}

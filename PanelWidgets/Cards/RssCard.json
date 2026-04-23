@@ -1,0 +1,45 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "${feedTitle}",
+      "weight": "Bolder",
+      "size": "Medium",
+      "spacing": "None"
+    },
+    {
+      "type": "Container",
+      "$data": "${articles}",
+      "spacing": "Small",
+      "separator": true,
+      "selectAction": {
+        "type": "Action.Execute",
+        "verb": "openArticle",
+        "data": {
+          "url": "${url}"
+        }
+      },
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "${headline}",
+          "wrap": true,
+          "maxLines": 2,
+          "size": "Small",
+          "weight": "Bolder",
+          "spacing": "Small"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${source} · ${age}",
+          "isSubtle": true,
+          "size": "Small",
+          "spacing": "None"
+        }
+      ]
+    }
+  ]
+}

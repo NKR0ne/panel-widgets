@@ -1,0 +1,90 @@
+<Window
+    x:Class="PanelWidgets.Settings.SettingsWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Panel Widgets — Settings"
+    MinWidth="480" MinHeight="560">
+
+  <Grid Margin="24" RowDefinitions="Auto,Auto,*,Auto">
+
+    <!-- Header -->
+    <StackPanel Grid.Row="0" Margin="0,0,0,24">
+      <TextBlock Text="Panel Widgets" Style="{StaticResource TitleTextBlockStyle}" />
+      <TextBlock Text="Windows 11 Widget Provider" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+    </StackPanel>
+
+    <!-- Microsoft Account section -->
+    <StackPanel Grid.Row="1" Spacing="8" Margin="0,0,0,24">
+      <TextBlock Text="Microsoft Account"
+                 Style="{StaticResource SubtitleTextBlockStyle}" />
+      <TextBlock Text="Required for Outlook Agenda and Microsoft To-Do widgets."
+                 Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                 TextWrapping="Wrap" />
+
+      <StackPanel Orientation="Horizontal" Spacing="12" Margin="0,8,0,0">
+        <Button x:Name="SignInButton"  Content="Sign in"  Click="SignIn_Click"  Style="{StaticResource AccentButtonStyle}" />
+        <Button x:Name="SignOutButton" Content="Sign out" Click="SignOut_Click" IsEnabled="False" />
+      </StackPanel>
+
+      <InfoBar x:Name="AuthStatus"
+               IsOpen="False"
+               IsClosable="False"
+               Margin="0,4,0,0" />
+    </StackPanel>
+
+    <!-- Traffic / TomTom section -->
+    <ScrollViewer Grid.Row="2">
+      <StackPanel Spacing="16">
+
+        <TextBlock Text="Traffic Widget"
+                   Style="{StaticResource SubtitleTextBlockStyle}" />
+
+        <StackPanel Spacing="8">
+          <TextBlock Text="TomTom API Key" />
+          <PasswordBox x:Name="TomTomKeyBox"
+                       PlaceholderText="Paste your TomTom API key"
+                       PasswordChanged="TomTomKey_Changed" />
+        </StackPanel>
+
+        <StackPanel Spacing="8">
+          <TextBlock Text="Origin (lat,lon)" />
+          <TextBox x:Name="OriginBox"
+                   PlaceholderText="e.g. 45.5017,-73.5673"
+                   TextChanged="TrafficSettings_Changed" />
+          <TextBox x:Name="OriginLabelBox"
+                   PlaceholderText='Display label (e.g. "Home")'
+                   TextChanged="TrafficSettings_Changed" />
+        </StackPanel>
+
+        <StackPanel Spacing="8">
+          <TextBlock Text="Destination (lat,lon)" />
+          <TextBox x:Name="DestBox"
+                   PlaceholderText="e.g. 45.5088,-73.5540"
+                   TextChanged="TrafficSettings_Changed" />
+          <TextBox x:Name="DestLabelBox"
+                   PlaceholderText='Display label (e.g. "Work")'
+                   TextChanged="TrafficSettings_Changed" />
+        </StackPanel>
+
+        <!-- RSS Feeds section -->
+        <TextBlock Text="RSS Feeds"
+                   Style="{StaticResource SubtitleTextBlockStyle}"
+                   Margin="0,8,0,0"/>
+        <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                   TextWrapping="Wrap">
+          Built-in feeds: International · Actualités · AI News · Tech.
+          Additional feed URLs can be added in a future update.
+        </TextBlock>
+
+      </StackPanel>
+    </ScrollViewer>
+
+    <!-- Footer -->
+    <TextBlock Grid.Row="3"
+               Text="Settings are saved automatically."
+               Foreground="{ThemeResource TextFillColorTertiaryBrush}"
+               HorizontalAlignment="Center"
+               Margin="0,16,0,0" />
+
+  </Grid>
+</Window>

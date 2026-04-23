@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
+  xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+  IgnorableNamespaces="mp uap uap3 com rescap">
+
+  <Identity
+    Name="NicolasKR.PanelWidgets"
+    Publisher="CN=NicolasKR"
+    Version="1.0.0.0"
+    ProcessorArchitecture="x64" />
+
+  <mp:PhoneIdentity PhoneProductId="5A3F2E1D-6B4C-7D8E-9F0A-1B2C3D4E5F60" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+
+  <Properties>
+    <DisplayName>Panel Widgets</DisplayName>
+    <PublisherDisplayName>NicolasKR</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.22621.0" MaxVersionTested="10.0.22621.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="en-US"/>
+    <Resource Language="fr-CA"/>
+  </Resources>
+
+  <Applications>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="$targetentrypoint$">
+      <uap:VisualElements
+        DisplayName="Panel Widgets"
+        Description="Windows 11 widgets for agenda, tasks, RSS news, and traffic."
+        BackgroundColor="transparent"
+        Square150x150Logo="Assets\Square150x150Logo.png"
+        Square44x44Logo="Assets\Square44x44Logo.png">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
+        <uap:SplashScreen Image="Assets\SplashScreen.png" />
+      </uap:VisualElements>
+
+      <Extensions>
+
+        <!-- COM server — the widget host launches this EXE to activate the provider -->
+        <com:Extension Category="windows.comServer">
+          <com:ComServer>
+            <com:ExeServer Executable="PanelWidgets\PanelWidgets.exe" DisplayName="Panel Widgets Provider" LaunchAndActivationPermission="$(AnyUserProfile)">
+              <com:Class Id="6B4A3F5E-7C2D-4E8A-9B1C-0D3F5E7A9C2B" DisplayName="Panel Widgets Provider" />
+            </com:ExeServer>
+          </com:ComServer>
+        </com:Extension>
+
+        <!-- Widget provider registration -->
+        <uap3:Extension Category="windows.appExtension">
+          <uap3:AppExtension
+            Name="com.microsoft.windows.widgets"
+            DisplayName="Panel Widgets"
+            Id="PanelWidgets"
+            PublicFolder="Public">
+            <uap3:Properties>
+              <WidgetProvider>
+                <ProviderIcons>
+                  <Icon Path="Assets\WidgetProviderIcon.png" />
+                </ProviderIcons>
+                <Activation>
+                  <CreateInstance ClassId="6B4A3F5E-7C2D-4E8A-9B1C-0D3F5E7A9C2B" />
+                </Activation>
+                <Definitions>
+
+                  <Definition Id="PanelWidgets_Clock"
+                    DisplayName="Clock"
+                    Description="Current time and date.">
+                    <Capabilities>
+                      <Capability>
+                        <Size Name="small" />
+                        <Size Name="medium" />
+                      </Capability>
+                    </Capabilities>
+                  </Definition>
+
+                  <Definition Id="PanelWidgets_Agenda"
+                    DisplayName="Outlook Agenda"
+                    Description="Today's calendar events from Outlook.">
+                    <Capabilities>
+                      <Capability>
+                        <Size Name="medium" />
+                        <Size Name="large" />
+                      </Capability>
+                    </Capabilities>
+                  </Definition>
+
+                  <Definition Id="PanelWidgets_Todo"
+                    DisplayName="Microsoft To-Do"
+                    Description="Tasks from your default To-Do list.">
+                    <Capabilities>
+                      <Capability>
+                        <Size Name="medium" />
+                        <Size Name="large" />
+                      </Capability>
+                    </Capabilities>
+                  </Definition>
+
+                  <Definition Id="PanelWidgets_Traffic"
+                    DisplayName="Traffic"
+                    Description="Live traffic conditions on your commute.">
+                    <Capabilities>
+                      <Capability>
+                        <Size Name="small" />
+                        <Size Name="medium" />
+                      </Capability>
+                    </Capabilities>
+                  </Definition>
+
+                  <Definition Id="PanelWidgets_RssInternational"
+                    DisplayName="International News"
+                    Description="Top international headlines from La Presse.">
+                    <Capabilities>
+                      <Capability>
+                        <Size Name="medium" />
+                        <Size Name="large" />
+                      </Capability>
+                    </Capabilities>
+                  </Definition>
+
+                  <Definition Id="PanelWidgets_RssActualites"
+                    DisplayName="Actualités"
+                    Description="Actualités from La Presse.">
+                    <Capabilities>
+                      <Capability>
+                        <Size Name="medium" />
+                        <Size Name="large" />
+                      </Capability>
+                    </Capabilities>
+                  </Definition>
+
+                  <Definition Id="PanelWidgets_RssAiNews"
+                    DisplayName="AI News"
+                    Description="Latest AI and machine learning news.">
+                    <Capabilities>
+                      <Capability>
+                        <Size Name="medium" />
+                        <Size Name="large" />
+                      </Capability>
+                    </Capabilities>
+                  </Definition>
+
+                  <Definition Id="PanelWidgets_RssTech"
+                    DisplayName="Tech News"
+                    Description="General technology headlines.">
+                    <Capabilities>
+                      <Capability>
+                        <Size Name="medium" />
+                        <Size Name="large" />
+                      </Capability>
+                    </Capabilities>
+                  </Definition>
+
+                </Definitions>
+              </WidgetProvider>
+            </uap3:Properties>
+          </uap3:AppExtension>
+        </uap3:Extension>
+
+        <!-- Settings window entry point (protocol activation) -->
+        <uap:Extension Category="windows.protocol">
+          <uap:Protocol Name="panel-widgets-settings" />
+        </uap:Extension>
+
+      </Extensions>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <Capability Name="internetClient" />
+    <rescap:Capability Name="runFullTrust" />
+  </Capabilities>
+
+</Package>

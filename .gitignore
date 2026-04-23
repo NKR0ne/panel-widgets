@@ -1,0 +1,24 @@
+## .NET / WinUI 3
+bin/
+obj/
+*.user
+.vs/
+AppPackages/
+BundleArtifacts/
+*.cer
+*.pfx
+*.appxsym
+
+## NuGet
+packages/
+*.nupkg
+nuget.exe
+
+## Secrets (never commit)
+**/appsettings.Local.json
+**/secrets.json
+
+## OS
+Thumbs.db
+.DS_Store
+desktop.ini
